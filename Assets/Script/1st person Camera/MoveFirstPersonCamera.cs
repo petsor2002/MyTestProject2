@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -6,6 +7,7 @@ using UnityEngine.Rendering;
 
 public class MoveFirstPersonCamera : MonoBehaviour
 {
+    // Referens till den rigidbodykompnent som ingår i karaktären
     Rigidbody rb;
 
     [Header("Movement")]
@@ -18,6 +20,7 @@ public class MoveFirstPersonCamera : MonoBehaviour
 
     void Start()
     {
+        // fryser karaktärens rigidbody, så inte grafikmotorn håller på och snurrar på den
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
     }
@@ -29,9 +32,10 @@ public class MoveFirstPersonCamera : MonoBehaviour
         float hInput = Input.GetAxisRaw("Horizontal");
         float vInput = Input.GetAxisRaw("Vertical");
 
-        // Lägg till hastigheten till vektorn för den nya positionen
+        // Skapa vektor som beskriver hur mycket vi rör oss. Lägg till hastigheten till vektorn för den nya positionen
         Vector3 moveVector = (transform.forward * vInput) + (transform.right * hInput);
 
+        // normalisera vektorn för att få ut en vektor som är högst 1 lång, annars blir diagonalerna sqrt(2) snabbare
         if (moveVector.magnitude > 1f)
             moveVector = moveVector.normalized;
 
@@ -48,12 +52,20 @@ public class MoveFirstPersonCamera : MonoBehaviour
         // Spara den vertikala hastigheten i en variabel
         float verticalSpeed = rb.linearVelocity.y;
 
-        // Om man är på marken, hoppa med Mellanslag. 
+        // Om man är på marken uppdatera hastighetsvektorn och, om på marken; hoppa med Mellanslag. 
         if (grounded) { 
             if (Input.GetButtonDown("Jump"))
-                verticalSpeed = 10;
+            {
+                verticalSpeed = 12;
+                
+            }
             rb.linearVelocity = new Vector3(moveVector.x, verticalSpeed, moveVector.z);
 
+
+        }
+        else
+        {
+            rb.linearVelocity = new Vector3(moveVector.x*1f, verticalSpeed, moveVector.z*1f);
         }
 
       

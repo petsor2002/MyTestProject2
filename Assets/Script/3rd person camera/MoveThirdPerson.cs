@@ -17,6 +17,7 @@ public class MoveThirdPerson : MonoBehaviour
 
     void Start()
     {
+        // Frys rb så fysikmotor inte påverkar
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
     }
@@ -34,6 +35,7 @@ public class MoveThirdPerson : MonoBehaviour
 
         Vector3 moveVector = (forwardVector * vInput) + (rightVector * hInput);
 
+        // Avoid speedy sqrt(2) iagonals
         if (moveVector.magnitude > 1)
             moveVector = moveVector.normalized;
 
@@ -50,7 +52,7 @@ public class MoveThirdPerson : MonoBehaviour
         // Spara den vertikala hastigheten i en variabel
         float verticalSpeed = rb.linearVelocity.y;
 
-        // Om man är på marken, hoppa med Mellanslag. 
+        // Om man är på marken uppdatera vektorn så man rör sig och om på marken, hoppa med Mellanslag. 
         if (grounded)
         {
             if (Input.GetButtonDown("Jump"))
