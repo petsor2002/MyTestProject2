@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -5,6 +7,8 @@ public class UIManager : MonoBehaviour
     static public UIManager instance;
 
     public Canvas edisplay;
+
+    public List<WhosGraveisThis> signs = new List<WhosGraveisThis>();
 
     void Start()
     {
@@ -15,8 +19,16 @@ public class UIManager : MonoBehaviour
         }
         instance = this;
     }
-    public void ShowCanvas(bool show)
+
+    private void Update()
     {
+        bool show = false;
+        foreach(WhosGraveisThis sign in signs)
+        {
+            if (sign.playerReading)
+                show = true;
+        }
+
         edisplay.gameObject.SetActive(show);
     }
 }
