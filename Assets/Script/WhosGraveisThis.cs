@@ -28,7 +28,7 @@ public class WhosGraveisThis : MonoBehaviour
 
             // Asset är 'Ändra materialets _Lightup till 1' och 'Text: "Who's grave is this?"' med symbol 'E'
             mat.SetFloat("_Lightup", 1f);
-            Debug.Log("NEW");
+            //Debug.Log("NEW");
 
             // Tänd UI
             playerReading = true;
@@ -42,7 +42,7 @@ public class WhosGraveisThis : MonoBehaviour
 
             playerReading = false;
             //UIManager.instance.ShowCanvas(false);
-            Debug.Log("OLD");
+            //Debug.Log("OLD");
         }
     }
 

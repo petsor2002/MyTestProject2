@@ -33,6 +33,8 @@ public class TurnOnGraveText : MonoBehaviour
         //Träffar vi något?
         if (!Physics.Raycast(ray, out hitInfo, reach))
             return false;
+
+        Debug.Log(hitInfo.collider.gameObject.name);
         //Är det vi träffade något annat än knappen?
         if (hitInfo.collider != gameObject.GetComponent<Collider>())
             return false;
