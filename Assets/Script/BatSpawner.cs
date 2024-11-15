@@ -12,11 +12,11 @@ public class BatSpawner : MonoBehaviour
     public Vector3 positionOffsetRange = new Vector3(0.5f, 0.5f, 0.5f);  // Random position offset range
     public Vector3 rotationOffsetRange = new Vector3(10f, 10f, 10f);  // Random rotation offset range (in degrees)
 
-
+    private AudioSource batSwarm;
 
     void Start()
     {
-        
+        batSwarm = GetComponent<AudioSource>();
     }
 
     IEnumerator SpawnSomeBats()
@@ -76,6 +76,7 @@ public class BatSpawner : MonoBehaviour
     {
 
         StartCoroutine(SpawnSomeBats());
+        batSwarm.Play();
      
 
     }
