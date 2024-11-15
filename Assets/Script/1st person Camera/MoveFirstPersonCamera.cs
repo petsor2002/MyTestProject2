@@ -11,6 +11,7 @@ public class MoveFirstPersonCamera : MonoBehaviour
 
     [Header("Movement")]
     public float moveSpeed = 5f;
+    public float jumpHeight = 2f;
 
     [Header("GroundCheck")]
     public float playerHeight = 2f;
@@ -55,7 +56,7 @@ public class MoveFirstPersonCamera : MonoBehaviour
         if (grounded) { 
             if (Input.GetButtonDown("Jump"))
             {
-                verticalSpeed = 12;
+                verticalSpeed = jumpHeight;
                 
             }
             rb.linearVelocity = new Vector3(moveVector.x, verticalSpeed, moveVector.z);

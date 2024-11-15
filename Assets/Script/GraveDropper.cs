@@ -24,6 +24,9 @@ public class GraveDropper : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         gameObject.SetActive(!gameObject.activeSelf);
-        
+        yield return new WaitForSeconds(4f);
+        gameObject.SetActive(!gameObject.activeSelf);
+
+
     }
 }
